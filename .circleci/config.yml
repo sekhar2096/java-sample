@@ -28,4 +28,4 @@ jobs:
           path: target/surefire-reports
       
       - store_artifacts:
-          path: target/java-sample-archive-1.0-SNAPSHOT.jar
+          path: target/java-archive-1.0-SNAPSHOT.jar
