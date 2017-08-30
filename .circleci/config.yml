@@ -2,7 +2,7 @@ version: 2
 
 jobs:
 
-  build:
+  build-maven:
     
     working_directory: ~/sample-java
 
