@@ -9,7 +9,7 @@ public class MainTest {
 
         String result = mytest.concatenate("one", "two");
 
-        assertEquals("one-two", result);
+        assertEquals("onetwo", result);
 
     }
 }
