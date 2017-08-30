@@ -26,6 +26,7 @@ jobs:
 	
       - store_artifacts:
 	  path: target/java-archive-1.0-SNAPSHOT.jar
+
   deploy:
 
     working_directory: ~/sample-java
@@ -60,7 +61,6 @@ workflows:
       - build
 
       - deploy:
-          type: approval
           requires:
             - build
 
