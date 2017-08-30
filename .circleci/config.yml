@@ -23,7 +23,10 @@ jobs:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       
       - run: mvn install -DskipTests=true 
-	
+
+      - store_artifacts:
+          path: target/java-archive-1.0-SNAPSHOT.jar
+
   deploy:
 
     working_directory: ~/sample-java
