@@ -45,7 +45,7 @@ jobs:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
 
       - store_artifacts:
-          path: /root/.m2/repository/localdomain/localhost/tutorial/java-archive/1.0-SNAPSHOT/java-archive-1.0-SNAPSHOT.jar
+          path: ../.m2/repository/localdomain/localhost/tutorial/java-archive/1.0-SNAPSHOT/java-archive-1.0-SNAPSHOT.jar
 
       - store_test_results:
           path: target/surefire-reports
