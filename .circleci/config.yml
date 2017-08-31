@@ -24,8 +24,10 @@ jobs:
       
       - run: mvn install -DskipTests=true 
 
-      - store_artifacts:
-          path: target/java-archive-1.0-SNAPSHOT.jar
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - target/java-archive-1.0-SNAPSHOT.jar
 
   deploy:
 
@@ -47,6 +49,9 @@ jobs:
             - ~/.m2
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
 
+      - attach_workspace:
+          at: /tmp/workspace
+    
       - store_test_results:
           path: target/surefire-reports
 
