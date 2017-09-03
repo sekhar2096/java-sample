@@ -9,10 +9,6 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
 
-    branches:
-      ignore:
-        - branch1
-
     steps:
       - checkout
 
@@ -75,4 +71,3 @@ workflows:
       - deploy:
           requires:
             - build
-
