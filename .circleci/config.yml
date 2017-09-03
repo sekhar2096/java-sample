@@ -11,7 +11,7 @@ jobs:
 
     branches:
       ignore:
-        - master
+        - branch1
 
     steps:
       - checkout
