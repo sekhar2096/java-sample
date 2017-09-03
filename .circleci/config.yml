@@ -11,7 +11,7 @@ jobs:
 
     branches:
       only:
-        - /branch1-.*/
+        - /branch1*/
 
     steps:
       - checkout
