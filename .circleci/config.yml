@@ -53,13 +53,11 @@ jobs:
           command: |
             echo "Installing pip"
             sudo apt-get install -y python-pip
-            echo "Installing virtualenv"
-            pip install --user virtualenv
-            virtualenv ~/cli-ve
-            virtualenv -p /usr/bin/python3.4 ~/cli-ve
-            source ~/cli-ve/bin/activate
+            echo "Curl...."
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
             echo "Installing aws"
-            pip install --upgrade awscli
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
             echo "check aws version"
             aws --version
 
