@@ -102,6 +102,7 @@ jobs:
               echo "Not master branch so not deploying"
             fi
 
+
       - save_cache:
           paths:
             - ~/.m2
@@ -109,6 +110,12 @@ jobs:
 
       - attach_workspace:
           at: ~/sample-java
+
+    deployment:
+      production:
+        branch: master
+        commands:
+          - eb deploy
 
 workflows:
 
