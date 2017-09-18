@@ -53,7 +53,7 @@ jobs:
           command: |
             echo "Installing pip aws"
             sudo apt-get install -y python-pip
-	    pip install awscli --upgrade --user
+            pip install awscli --upgrade --user
 
       - save_cache:
           paths:
