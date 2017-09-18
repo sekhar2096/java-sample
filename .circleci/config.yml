@@ -52,6 +52,7 @@ jobs:
           shell: /bin/sh
           command: |
             echo "Installing pip aws"
+            apt install pip
             pip install awscli --upgrade --user
 
       - save_cache:
