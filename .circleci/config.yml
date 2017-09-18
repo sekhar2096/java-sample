@@ -51,8 +51,9 @@ jobs:
       - run:
           shell: /bin/sh
           command: |
-            echo "Installing pip aws"
+            echo "Installing pip"
             sudo apt-get install -y python-pip
+            echo "Installing aws"
             pip install awscli --upgrade --user
 
       - save_cache:
