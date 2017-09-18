@@ -53,8 +53,15 @@ jobs:
           command: |
             echo "Installing pip"
             sudo apt-get install -y python-pip
+            echo "Installing virtualenv"
+            pip install --user virtualenv
+            virtualenv ~/cli-ve
+            virtualenv -p /usr/bin/python3.4 ~/cli-ve
+            source ~/cli-ve/bin/activate
             echo "Installing aws"
-            pip install awscli --upgrade --user
+            pip install --upgrade awscli
+            echo "check aws version"
+            aws --version
 
       - save_cache:
           paths:
@@ -62,6 +69,9 @@ jobs:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
 
       - attach_workspace:
+
+q
+q
           at: ~/sample-java
 
       - store_artifacts:
