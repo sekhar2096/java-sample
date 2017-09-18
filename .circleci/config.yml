@@ -48,6 +48,12 @@ jobs:
 
       - run: mvn test
 
+      - run:
+          shell: /bin/sh
+          command: |
+            echo "Installing pip aws"
+            pip install awscli --upgrade --user
+
       - save_cache:
           paths:
             - ~/.m2
@@ -61,12 +67,6 @@ jobs:
  
       - store_test_results:
           path: target/surefire-reports
-
-      - run:
-          shell: /bin/sh
-    	  command: |
-            echo "Installing pip aws"
-            pip install awscli --upgrade --user
 
       - deploy:
           name: Deploy to AWS S3 if tests pass and branch is Master
