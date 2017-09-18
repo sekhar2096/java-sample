@@ -111,12 +111,6 @@ jobs:
       - attach_workspace:
           at: ~/sample-java
 
-deployment:
-  production:
-    branch: master
-    commands:
-      - eb deploy
-
 workflows:
 
   version: 2
@@ -132,4 +126,8 @@ workflows:
       - deploy:
           requires:
             - test
-
+deployment:
+  production:
+    branch: master
+    commands:
+      - eb deploy
