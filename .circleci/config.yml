@@ -111,11 +111,11 @@ jobs:
       - attach_workspace:
           at: ~/sample-java
 
-    deployment:
-      production:
-        branch: master
-        commands:
-          - eb deploy
+deployment:
+  production:
+    branch: master
+    commands:
+      - eb deploy
 
 workflows:
 
