@@ -33,7 +33,7 @@ jobs:
           paths:
             - target/java-archive-1.0-SNAPSHOT.jar
 
-  deploy:
+  test:
 
     working_directory: ~/sample-java
 
@@ -47,6 +47,32 @@ jobs:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
 
       - run: mvn test
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+
+      - attach_workspace:
+
+          at: ~/sample-java
+
+      - persist_to_workspace:
+          root: ~/sample-java
+          paths:
+            - target/surefire-reports
+  deploy:
+
+    working_directory: ~/sample-java
+
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
 
       - run:
           shell: /bin/sh
@@ -72,7 +98,7 @@ jobs:
 
       - store_artifacts:
           path: target/java-archive-1.0-SNAPSHOT.jar
- 
+
       - store_test_results:
           path: target/surefire-reports
 
@@ -85,16 +111,20 @@ jobs:
               echo "Not master branch so not deploying"
             fi
 
+
 workflows:
 
   version: 2
 
-  build-and-deploy:
+  build-test-and-deploy:
 
     jobs:
 
       - build
-
-      - deploy:
+      - test:
           requires:
             - build
+      - deploy:
+          requires:
+            - test
+
