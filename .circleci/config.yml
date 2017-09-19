@@ -1,5 +1,11 @@
 version: 2
 
+deployment:
+  production:
+    branch: master
+    commands:
+      - eb deploy
+
 jobs:
 
   build:
@@ -101,11 +107,6 @@ jobs:
             else
               echo "Not master branch so not deploying"
             fi
-      deployment:
-        production:
-          branch: master
-          commands:
-            - eb deploy
 
       - save_cache:
           paths:
