@@ -63,6 +63,12 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
 
+    deployment:
+      production:
+        branch: master
+        commands:
+          - eb deploy
+
     steps:
       - checkout
 
@@ -126,8 +132,3 @@ workflows:
       - deploy:
           requires:
             - test
-deployment:
-  production:
-    branch: master
-    commands:
-      - eb deploy
