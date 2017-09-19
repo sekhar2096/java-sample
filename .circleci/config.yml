@@ -63,12 +63,6 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
 
-    deployment:
-      production:
-        branch: master
-        commands:
-          - eb deploy
-
     steps:
       - checkout
 
@@ -107,7 +101,11 @@ jobs:
             else
               echo "Not master branch so not deploying"
             fi
-
+      deployment:
+        production:
+          branch: master
+          commands:
+            - eb deploy
 
       - save_cache:
           paths:
