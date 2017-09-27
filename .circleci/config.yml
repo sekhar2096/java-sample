@@ -128,6 +128,18 @@ jobs:
           name: Run AWS EC2 Instance
           shell: /bin/sh
           command: |
+            echo "Installing python-pip"
+            sudo apt-get install -y python-pip
+
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+
+            echo "Installing awscli"
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+            echo "check aws version"
+            aws --version
+
             echo "Creating EC2 Instance"
             aws ec2 run-instances --image-id ami-10186f7c --count 1 --instance-type t2.micro --key-name myaws --security-group-ids sg-9f365af8
       
