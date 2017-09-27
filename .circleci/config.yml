@@ -141,7 +141,7 @@ jobs:
             aws --version
 
             echo "Creating EC2 Instance"
-            aws ec2 run-instances --image-id ami-10186f7c --count 1 --instance-type t2.micro --key-name myaws --security-group-ids sg-9f365af8
+            aws ec2 run-instances --image-id ami-10186f7c --count 1 --instance-type t2.micro --key-name myaws --security-group-ids sg-9f365af8 --region sa-east-1
       
       - save_cache:
           paths:
