@@ -1,11 +1,5 @@
 version: 2
 
-deployment:
-  production:
-    branch: master
-    commands:
-      - eb deploy
-
 jobs:
 
   build:
@@ -116,6 +110,36 @@ jobs:
       - attach_workspace:
           at: ~/sample-java
 
+  ec2:
+    working_directory: ~/sample-java
+
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+
+      - attach_workspace:
+          at: ~/sample-java
+      - run:
+          name: Run AWS EC2 Instance
+          shell: /bin/sh
+          command: |
+            echo "Creating EC2 Instance"
+            aws ec2 run-instances --image-id ami-10186f7c --count 1 --instance-type t2.micro --key-name myaws --security-group-ids sg-9f365af8
+      
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+
+      - attach_workspace:
+          at: ~/sample-java
+
+
 workflows:
 
   version: 2
@@ -131,3 +155,7 @@ workflows:
       - deploy:
           requires:
             - test
+      - ec2:
+          requires:
+            - deploy
+
